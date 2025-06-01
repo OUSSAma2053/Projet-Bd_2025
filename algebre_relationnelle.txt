@@ -1,0 +1,14 @@
+a. Réservations avec nom du client et ville de l’hôtel réservé
+π idReservation, nomComplet, ville (Reservation ⨝ Client ⨝ (Chambre ⨝ Hotel))
+
+b. Clients qui habitent à Paris
+σ ville = 'Paris' (Client)
+
+c. Nombre de réservations par client
+γ nomComplet; COUNT(idReservation) → nbReservations (Client ⨝ Reservation)
+
+d. Nombre de chambres pour chaque type de chambre
+γ designation; COUNT(idChambre) → nbChambres (TypeChambre ⨝ Chambre)
+
+e. Chambres non réservées pour une période donnée
+Chambre − π idChambre (σ ¬(dateFin < date1 ∨ dateDebut > date2) (Reservation ⨝ Chambre))
